@@ -17,6 +17,8 @@ const songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
 // Keep track of song
 let songIndex = 2;
 
+var isAutomaticPlay = true;
+
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
 
@@ -69,6 +71,15 @@ function nextSong() {
   loadSong(songs[songIndex]);
 
   playSong();
+}
+
+function onAudioEnd() {
+    if(isAutomaticPlay) {
+        let isReadyToNextSong = false
+        setTimeout(nextSong, 3000);
+        //while(isReadyToNextSong)
+
+    }
 }
 
 // Update progress bar
