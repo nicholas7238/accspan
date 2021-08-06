@@ -183,7 +183,7 @@ audio.addEventListener('timeupdate', updateProgress);
 progressContainer.addEventListener('click', setProgress);
 
 // Song ends
-audio.addEventListener('ended', nextSong);
+audio.addEventListener('ended', onAudioEnd);
 
 // Time of song
 audio.addEventListener('timeupdate',DurTime);
