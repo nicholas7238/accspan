@@ -82,7 +82,7 @@ function onAudioEnd() {
     }
 }
 
-function keyboardInput() {
+function keyboardInput(event) {
     if(event.keyCode == 37) {
         alert('Left was pressed');
     }
