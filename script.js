@@ -82,6 +82,15 @@ function onAudioEnd() {
     }
 }
 
+function keyboardInput() {
+    if(event.keyCode == 37) {
+        alert('Left was pressed');
+    }
+    else if(event.keyCode == 39) {
+        alert('Right was pressed');
+    }
+}
+
 // Update progress bar
 function updateProgress(e) {
   const { duration, currentTime } = e.srcElement;
@@ -187,3 +196,5 @@ audio.addEventListener('ended', onAudioEnd);
 
 // Time of song
 audio.addEventListener('timeupdate',DurTime);
+
+audio.addEventListener('keydown', keyboardInput);
