@@ -82,14 +82,18 @@ function onAudioEnd() {
     }
 }
 
+function repeatAudio() {}
+
 function keyboardInput(event) {
-    if(event.keyCode == 37) {
+    if(event.keyCode == 37) { // left arrow
         //alert('Left was pressed');
         prevSong()
     }
-    else if(event.keyCode == 39) {
+    else if(event.keyCode == 39) { // right arrow
         //alert('Right was pressed');
         nextSong()
+    } else if(event.keyCode == 13) {// enter
+        playSong();
     }
 }
 
