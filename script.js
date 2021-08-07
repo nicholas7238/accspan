@@ -35,7 +35,7 @@ function readTextFile() {
         text = fr.result;
     }
 
-    //fr.readAsText('filenames.txt')
+    fr.readAsText('filenames.txt')
     //var lines = text.split('\n');
     //songs = lines;
 
