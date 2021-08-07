@@ -31,11 +31,11 @@ function readTextFile() {
 
     debug.innerText = "lol";
 
-    fr.onload = function(event) {
-        text = fr.result;
-    }
+    //fr.onload = function(event) {
+    //    text = fr.result;
+    //}
 
-    fr.readAsText('filenames.txt')
+    //fr.readAsText('filenames.txt')
     //var lines = text.split('\n');
     //songs = lines;
 
