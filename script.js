@@ -197,4 +197,4 @@ audio.addEventListener('ended', onAudioEnd);
 // Time of song
 audio.addEventListener('timeupdate',DurTime);
 
-audio.addEventListener('keydown', keyboardInput);
+document.addEventListener('keydown', keyboardInput);
