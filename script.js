@@ -11,6 +11,7 @@ const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
+const debug = document.getElementById('debug');
 
 // Song titles
 var songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
@@ -26,10 +27,10 @@ loadSong(songs[songIndex]);
 
 function readTextFile() {
     var fr = new FileReader();
-
+    var text;
 
     fr.onload = function(event) {
-        var text = fr.result;
+        text = fr.result;
     }
 
     fr.readAsText('filenames.txt')
@@ -38,6 +39,7 @@ function readTextFile() {
     for(var i = 0; i < lines.length; i+++ {
         
     })
+    debug.innerText = lines[0];
 }
 
 // Update song details
