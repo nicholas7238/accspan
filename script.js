@@ -17,7 +17,7 @@ const songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
 // Keep track of song
 let songIndex = 2;
 
-var isAutomaticPlay = true;
+var isAutomaticPlay = false;
 
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
@@ -84,10 +84,12 @@ function onAudioEnd() {
 
 function keyboardInput(event) {
     if(event.keyCode == 37) {
-        alert('Left was pressed');
+        //alert('Left was pressed');
+        prevSong()
     }
     else if(event.keyCode == 39) {
-        alert('Right was pressed');
+        //alert('Right was pressed');
+        nextSong()
     }
 }
 
