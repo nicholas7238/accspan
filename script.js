@@ -31,9 +31,9 @@ function readTextFile() {
 
     debug.innerText = "lol";
 
-    //fr.onload = function(event) {
-    //    text = fr.result;
-    //}
+    fr.onload = function() {
+        text = fr.result;
+    }
 
     //fr.readAsText('filenames.txt')
     //var lines = text.split('\n');
