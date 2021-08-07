@@ -21,7 +21,7 @@ let songIndex = 2;
 
 var isAutomaticPlay = false;
 
-//readTextFile();
+readTextFile();
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
 
@@ -36,11 +36,9 @@ function readTextFile() {
     }
 
     fr.readAsText('filenames.txt')
-    var lines = text.split('\n');
+    //var lines = text.split('\n');
     //songs = lines;
-    for(var i = 0; i < lines.length; i+++ {
-        
-    })
+
     debug.innerText = "lol";
 }
 
