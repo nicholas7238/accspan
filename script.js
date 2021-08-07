@@ -11,16 +11,34 @@ const cover = document.getElementById('cover');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
+
 // Song titles
-const songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
+var songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
 
 // Keep track of song
 let songIndex = 2;
 
 var isAutomaticPlay = false;
 
+readTextFile();
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
+
+function readTextFile() {
+    var fr = new FileReader();
+
+
+    fr.onload = function(event) {
+        var text = fr.result;
+    }
+
+    fr.readAsText('filenames.txt')
+    var lines = text.split('\n');
+    songs = lines;
+    for(var i = 0; i < lines.length; i+++ {
+        
+    })
+}
 
 // Update song details
 function loadSong(song) {
