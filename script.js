@@ -29,13 +29,15 @@ function readTextFile() {
     var fr = new FileReader();
     var text;
 
+    debug.innerText = "lol";
+
     fr.onload = function(event) {
         text = fr.result;
     }
 
     fr.readAsText('filenames.txt')
     var lines = text.split('\n');
-    songs = lines;
+    //songs = lines;
     for(var i = 0; i < lines.length; i+++ {
         
     })
