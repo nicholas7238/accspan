@@ -21,7 +21,7 @@ let songIndex = 2;
 
 var isAutomaticPlay = false;
 
-readTextFile();
+//readTextFile();
 // Initially load song details into DOM
 loadSong(songs[songIndex]);
 
