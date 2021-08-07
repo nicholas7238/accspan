@@ -39,7 +39,7 @@ function readTextFile() {
     for(var i = 0; i < lines.length; i+++ {
         
     })
-    debug.innerText = lines[0];
+    debug.innerText = text;
 }
 
 // Update song details
