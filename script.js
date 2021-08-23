@@ -8,38 +8,165 @@ const progress = document.getElementById('progress');
 const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
+var timeline = document.getElementById('timeline');
 const currTime = document.querySelector('#currTime');
 const durTime = document.querySelector('#durTime');
 
 const debug = document.getElementById('debug');
 
+const lessonNumber = 20.5;
+var numOfSlides = 4; 
+var imageWidth = cover.width;
+var imageHeight = cover.height;
+const difficultyIcon = document.getElementById('difficulty');
+const difficultyArray = new Array(numOfSlides).fill(false);
+const difficultyCheckbox = document.getElementById('difficultyCheckbox');
+const automaticPlayCheckbox = document.getElementById('automaticPlayCheckbox');
+const prevButton = document.getElementById('prevButton');
+const repeatButton = document.getElementById('repeatButton');
+const nextButton = document.getElementById('nextButton');
+const changeQuizButton = document.getElementById('changeQuizButton');
+const quizSelect = document.getElementById('quizSelect');
+//difficultyArray[1] = true;
+const difficultColor = "#FF0000"; // red
+const defaultColor = "#888888"; // grey
+const currentColor = "#00EE00"; // green
+
+
 // Song titles
 var songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
+createSongsList(89);
+var quizName = '';
+var quizAmount = 1;
 
 // Keep track of song
-let songIndex = 2;
+let songIndex = 0;
 
 var isAutomaticPlay = false;
+var isCancelAutomaticPlayTimer = false;
+var automaticTimeout;
 
-readTextFile();
+
+//alert(imageWidth);
+//readTextFile();
 // Initially load song details into DOM
+drawTimeLine();
 loadSong(songs[songIndex]);
+
+function createSongsList(size) {
+    let titleName = "L2 ";
+    songs = [];
+    for(var i = 0; i < size; i++) {
+        songs[i] = titleName + i;
+    }
+    numOfSlides = size;
+    //console.log(songs2);
+}
 
 function readTextFile() {
     var fr = new FileReader();
     var text;
 
+    //var file = new File('filenames.txt');
+
     debug.innerText = "lol";
 
-    fr.onload = function() {
+    fr.onload = function(e) {
         text = fr.result;
     }
 
-    fr.readAsText('filenames.txt')
+    fr.readAsText('filenames.txt');
     //var lines = text.split('\n');
     //songs = lines;
 
-    debug.innerText = "lol";
+    //debug.innerText = lines[0];
+}
+
+function drawRedSquare() {
+    var ctx = difficultyIcon.getContext("2d");
+    ctx.fillStyle = "#FF0000";
+    ctx.fillRect(0,0,20,20);
+}
+
+function drawGreySquare() {
+    var ctx = difficultyIcon.getContext("2d");
+    ctx.fillStyle = "#888888";
+    ctx.fillRect(0,0,20,20);
+}
+
+function drawDifficultySquare(isDifficult) {
+    var ctx = difficultyIcon.getContext("2d");
+    if(difficultyArray[songIndex]) {
+        ctx.fillStyle = "#FF0000";
+    } else {
+        ctx.fillStyle = "#888888";
+    }
+    ctx.fillRect(0,0,20,20);
+}
+
+function drawTimeLine(){
+    var square = timeline.getContext("2d");
+    var squareWidth = cover.width / numOfSlides;
+    square.fillStyle = "#888888";
+    for(var i = 0; i < numOfSlides; i++) {
+        if(difficultyArray[i]) {
+            square.fillStyle = difficultColor;
+        } else {
+            square.fillStyle = defaultColor;
+        }
+        square.fillRect(i * squareWidth, 0, squareWidth - 1, 20);
+
+        
+        if(i == songIndex) {
+            square.fillStyle = currentColor;
+            square.fillRect(i * squareWidth, 0, squareWidth - 1, 20);
+            if(difficultyArray[i]) {
+                square.fillStyle = difficultColor;
+            } else {
+                square.fillStyle = defaultColor;
+            }
+            square.fillRect(i * squareWidth + 3, 0 + 3, squareWidth - 1 - 6, 20 - 6);
+        }
+        //alert(i);
+    }
+
+}
+
+function markAsDifficult() {
+    difficultyArray[songIndex] = difficultyCheckbox.checked;
+    refreshGraphics();
+}
+
+function chooseIndexOnTimeline(e) {
+    clearTimeout(automaticTimeout);
+    var cRect = timeline.getBoundingClientRect();
+    var canvasX = Math.round(e.clientX - cRect.left);
+    //var canvasY = Math.round(document.clientY - cRect.top);
+
+    var newSongIndex = Math.floor(canvasX / (cover.width / numOfSlides));
+    //console.log(canvasX);
+    console.log(newSongIndex);
+
+    songIndex = newSongIndex;
+
+    loadSong(songs[songIndex]);
+  
+    playSong();
+}
+
+function setAutomaticPlay() {
+    clearTimeout(automaticTimeout);
+    isAutomaticPlay = automaticPlayCheckbox.checked;
+    if(isAutomaticPlay) {
+        playSong();
+    }
+    //console.log(isAutomaticPlay);
+}
+
+function refreshGraphics() {
+    drawTimeLine();
+    drawDifficultySquare(true);
+    difficultyCheckbox.checked = difficultyArray[songIndex];
 }
 
 // Update song details
@@ -47,13 +174,15 @@ function loadSong(song) {
   title.innerText = song;
   audio.src = `audio/${song}.mp3`;
   cover.src = `images/${song}.png`;
+
+  refreshGraphics();
 }
 
 // Play song
 function playSong() {
   musicContainer.classList.add('play');
-  playBtn.querySelector('i.fas').classList.remove('fa-play');
-  playBtn.querySelector('i.fas').classList.add('fa-pause');
+  //playBtn.querySelector('i.fas').classList.remove('fa-play');
+  //playBtn.querySelector('i.fas').classList.add('fa-pause');
 
   audio.play();
 }
@@ -93,10 +222,28 @@ function nextSong() {
   playSong();
 }
 
+function nextSongAutomatic() {
+    if(!isCancelAutomaticPlayTimer) {
+        nextSong();
+    }
+}
+
+function changeQuiz() {
+    quizName = quizSelect.value;
+    quizAmount = quizSelect.options[quizSelect.selectedIndex].getAttribute('data-amount');
+
+    createSongsList(quizAmount);
+
+    console.log(quizSelect.value);
+    console.log(quizSelect.options[quizSelect.selectedIndex].getAttribute('data-amount'));
+    console.log(quizSelect.options[quizSelect.selectedIndex].text);
+}
+
 function onAudioEnd() {
     if(isAutomaticPlay) {
         let isReadyToNextSong = false
-        setTimeout(nextSong, 3000);
+        isCancelAutomaticPlayTimer = false;
+        automaticTimeout = setTimeout(nextSong, 3000);
         //while(isReadyToNextSong)
 
     }
@@ -104,15 +251,37 @@ function onAudioEnd() {
 
 function repeatAudio() {}
 
+function clearTimerAndPrevSong() {
+    isCancelAutomaticPlayTimer = true;
+    clearTimeout(automaticTimeout);
+    prevSong();
+}
+function clearTimerAndNextSong() {
+    isCancelAutomaticPlayTimer = true;
+    clearTimeout(automaticTimeout);
+    nextSong();
+}
+function clearTimerAndPlaySong() {
+    isCancelAutomaticPlayTimer = true;
+    clearTimeout(automaticTimeout);
+    playSong();
+}
+
 function keyboardInput(event) {
     if(event.keyCode == 37) { // left arrow
         //alert('Left was pressed');
-        prevSong()
+        isCancelAutomaticPlayTimer = true;
+        clearTimeout(automaticTimeout);
+        prevSong();
     }
     else if(event.keyCode == 39) { // right arrow
         //alert('Right was pressed');
-        nextSong()
+        isCancelAutomaticPlayTimer = true;
+        clearTimeout(automaticTimeout);
+        nextSong();
     } else if(event.keyCode == 13) {// enter
+        isCancelAutomaticPlayTimer = true;
+        clearTimeout(automaticTimeout);
         playSong();
     }
 }
@@ -195,7 +364,7 @@ function DurTime (e) {
 	durTime.innerHTML = min_d +':'+ sec_d;
 		
 };
-
+/*
 // Event listeners
 playBtn.addEventListener('click', () => {
   const isPlaying = musicContainer.classList.contains('play');
@@ -210,6 +379,11 @@ playBtn.addEventListener('click', () => {
 // Change song
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+*/
+prevButton.addEventListener('click', clearTimerAndPrevSong);
+nextButton.addEventListener('click', clearTimerAndNextSong);
+repeatButton.addEventListener('click', clearTimerAndPlaySong);
+changeQuizButton.addEventListener('click', changeQuiz);
 
 // Time/song update
 audio.addEventListener('timeupdate', updateProgress);
@@ -224,3 +398,6 @@ audio.addEventListener('ended', onAudioEnd);
 audio.addEventListener('timeupdate',DurTime);
 
 document.addEventListener('keydown', keyboardInput);
+difficultyCheckbox.addEventListener('click', markAsDifficult);
+automaticPlayCheckbox.addEventListener('click', setAutomaticPlay);
+timeline.addEventListener('click', chooseIndexOnTimeline);

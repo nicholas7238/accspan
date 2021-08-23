@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    </head>
 <body>
-
+<!--
 <h1>My First Heading</h1>
 <p id="debug">My first paragraph.</p>
+-->
 
 
-
-<h1>Quiz</h1>
+<h1> Accelerated Spanish Listening Quiz</h1>
 
 <div class="music-container" id="music-container">
   <div class="music-info">
@@ -20,8 +25,34 @@
   <audio src="audio/20.5 Quiz 0.mp3" id="audio"></audio>
 
   <div class="img-container">
-    <img src="images/20.5 Quiz 0.png" alt="music-cover" id="cover" />
+    <canvas id="difficulty" width="20" height="20"></canvas>
+    <input type="checkbox" id="difficultyCheckbox" name="difficultyCheckbox">
+    <label for="difficultyCheckbox">Mark as difficult</label><br>
+    <input type="checkbox" id="automaticPlayCheckbox" name="automaticPlayCheckbox">
+    <label for="automaticPlayCheckbox">Play audio quizzes automatically</label><br>
+    <img src="default_image.png" alt="music-cover" id="cover" /><br>
+    <canvas class="timeline" id="timeline" width="640" height="20"></canvas>
   </div>
+
+  <div class="buttons">
+      <button id="prevButton">Previous or [Left Arrow] Key</button>
+      <button id="repeatButton">Repeat or [Enter] Key</button>
+      <button id="nextButton">Next or [Right Arrow] Key</button>
+  </div>
+
+  <div class="dropdown">
+      <br>
+    <label for="quizSelector">Choose a quiz:</label>
+
+    <select name="quizSelect" id="quizSelect">
+        <option value="Week 2 Day 3 Quiz" data-amount="41" data-has-images="1">Week 2 Day 3 Quiz</option>
+        <option value="Audio Quiz Lesson 7 A" data-amount="110" data-has-images="0">Audio Quiz Lesson 7 A</option>
+        <option value="Week 3 Day 1 Quiz" data-amount="126" data-has-images="1">Week 3 Day 1 Quiz</option>
+    </select> 
+    <input id="changeQuizButton" type="submit" value="Change Quiz">
+  </div>
+
+<!--
   <div class="navigation">
     <button id="prev" class="action-btn">
       <i class="fas fa-backward"></i>
@@ -33,9 +64,11 @@
       <i class="fas fa-forward"></i>
     </button>
   </div>
+-->
 </div>
+<!--textarea cols="80" rows="7" style="overflow:auto;"></textarea>-->
 
-<script src="script.js"></script>
+<script src="script3.js"></script>
 
 </body>
 </html> 

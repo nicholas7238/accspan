@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    </head>
+<body>
+<!--
+<h1>My First Heading</h1>
+<p id="debug">My first paragraph.</p>
+-->
+
+
+<h1>2nd Version</h1>
+
+<div class="music-container" id="music-container">
+  <div class="music-info">
+    <h4 id="title"></h4>
+    <div class="progress-container" id="progress-container">
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+
+  <audio src="Audio Quiz Lesson 7 A.mp3" id="audio"></audio>
+
+  <div class="img-container">
+    <canvas id="difficulty" width="20" height="20"></canvas>
+    <input type="checkbox" id="difficultyCheckbox" name="difficultyCheckbox">
+    <label for="difficultyCheckbox">Mark as difficult</label><br>
+    <input type="checkbox" id="automaticPlayCheckbox" name="automaticPlayCheckbox">
+    <label for="automaticPlayCheckbox">Play audio quizzes automatically</label><br>
+    <img src="images/20.5 Quiz 0.png" alt="music-cover" id="cover" />
+    <canvas class="timeline" id="timeline" width="640" height="20"></canvas>
+  </div>
+
+  <div class="buttons">
+      <button id="prevButton">Previous or [Left Arrow] Key</button>
+      <button id="repeatButton">Repeat or [Enter] Key</button>
+      <button id="nextButton">Next or [Right Arrow] Key</button>
+  </div>
+
+<!--
+  <div class="navigation">
+    <button id="prev" class="action-btn">
+      <i class="fas fa-backward"></i>
+    </button>
+    <button id="play" class="action-btn action-btn-big">
+      <i class="fas fa-play"></i>
+    </button>
+    <button id="next" class="action-btn">
+      <i class="fas fa-forward"></i>
+    </button>
+  </div>
+-->
+</div>
+<!--textarea cols="80" rows="7" style="overflow:auto;"></textarea>-->
+
+<script src="script2.js"></script>
+
+</body>
+</html> 
