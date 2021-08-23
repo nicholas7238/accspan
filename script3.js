@@ -9,8 +9,8 @@ const progressContainer = document.getElementById('progress-container');
 const title = document.getElementById('title');
 const cover = document.getElementById('cover');
 var timeline = document.getElementById('timeline');
-const currTime = document.querySelector('#currTime');
-const durTime = document.querySelector('#durTime');
+//const currTime = document.querySelector('#currTime');
+//const durTime = document.querySelector('#durTime');
 
 const debug = document.getElementById('debug');
 
@@ -320,7 +320,7 @@ function keyboardInput(event) {
         playSong();
     }
 }
-
+/*
 // Update progress bar
 function updateProgress(e) {
   const { duration, currentTime } = e.srcElement;
@@ -421,16 +421,16 @@ repeatButton.addEventListener('click', clearTimerAndPlaySong);
 changeQuizButton.addEventListener('click', changeQuiz);
 
 // Time/song update
-audio.addEventListener('timeupdate', updateProgress);
+//audio.addEventListener('timeupdate', updateProgress);
 
 // Click on progress bar
-progressContainer.addEventListener('click', setProgress);
+//progressContainer.addEventListener('click', setProgress);
 
 // Song ends
 audio.addEventListener('ended', onAudioEnd);
 
 // Time of song
-audio.addEventListener('timeupdate',DurTime);
+//audio.addEventListener('timeupdate',DurTime);
 
 document.addEventListener('keydown', keyboardInput);
 difficultyCheckbox.addEventListener('click', markAsDifficult);
