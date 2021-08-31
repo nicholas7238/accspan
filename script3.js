@@ -32,17 +32,19 @@ const difficultColor = "#FF0000"; // red
 const defaultColor = "#888888"; // grey
 const currentColor = "#00EE00"; // green
 
+// Keep track of song
+let songIndex = 0;
 
 // Song titles
 var songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
 //createSongsList(89);
-var quizName = 'Week 3 Day 1 Quiz';
-var quizAmount = 126;
+var quizName = 'Week 4 Day 2 Quiz';
+var quizAmount = 103;
+changeQuiz();
 createSongsList(quizAmount);
-var isQuizAudioOnly = false;
+var isQuizAudioOnly = true;
 
-// Keep track of song
-let songIndex = 0;
+
 
 var isAutomaticPlay = false;
 var isCancelAutomaticPlayTimer = false;
@@ -242,9 +244,8 @@ function nextSongAutomatic() {
     }
 }
 
-function changeQuiz() {
-    cover.src = `${quizName}/images/${songs[0]}.png`;
-    refreshGraphics();
+function changeQuiz() {              ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     quizName = quizSelect.value;
     quizAmount = quizSelect.options[quizSelect.selectedIndex].getAttribute('data-amount');
     if(quizSelect.options[quizSelect.selectedIndex].getAttribute('data-has-images') == "1") {
@@ -252,11 +253,13 @@ function changeQuiz() {
     } else {
         isQuizAudioOnly = true;
     }
-
+    cover.src = `${quizName}/images/${songs[0]}.png`;
+    refreshGraphics();
 
     createSongsList(quizAmount);
     songIndex = 0;
     difficultyArray.fill(false);
+    
     /*
     if(cover.height == 0) {
         isQuizAudioOnly = true;
