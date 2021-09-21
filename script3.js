@@ -40,9 +40,10 @@ var songs = ['20.5 Quiz 0', '20.5 Quiz 1', '20.5 Quiz 2', '20.5 Quiz 3'];
 //createSongsList(89);
 var quizName = 'Week 4 Day 2 Quiz';
 var quizAmount = 103;
+var isQuizAudioOnly = true;
 changeQuiz();
 createSongsList(quizAmount);
-var isQuizAudioOnly = true;
+
 
 
 
